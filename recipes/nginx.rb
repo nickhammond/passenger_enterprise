@@ -26,7 +26,7 @@ include_recipe "nginx::source"
 include_recipe "passenger_enterprise"
 
 configure_flags = node[:nginx][:configure_flags].join(" ")
-nginx_install = node[:nginx][:install_path]
+nginx_install = node[:nginx][:source][:prefix]
 nginx_version = node[:nginx][:version]
 nginx_dir = node[:nginx][:dir]
 
