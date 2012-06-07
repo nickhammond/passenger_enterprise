@@ -38,7 +38,7 @@ execute "passenger_nginx_module" do
       --extra-configure-flags='#{configure_flags}'
   }
   
-  not_if "#{nginx_install}/sbin/nginx -V 2>&1 | grep #{node[:passenger_enterprise][:version]}"
+  not_if "#{nginx_install}/sbin/nginx -V 2>&1 | grep passenger-#{node[:passenger_enterprise][:version]}"
   notifies :restart, resources(:service => "nginx")
 end
 
