@@ -47,5 +47,5 @@ template "#{nginx_dir}/conf.d/passenger.conf" do
   owner "root"
   group "root"
   mode "0644"
-  notifies :restart, resources(:service => "nginx")
+  notifies :reload, resources(:service => "nginx")
 end
