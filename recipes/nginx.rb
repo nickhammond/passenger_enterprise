@@ -35,7 +35,7 @@ execute "passenger_nginx_module" do
     #{node[:ruby_enterprise][:install_path]}/bin/passenger-install-nginx-module \
       --auto --prefix=#{nginx_install} \
       --nginx-source-dir=#{Chef::Config[:file_cache_path]}/nginx-#{nginx_version} \
-      #{"--extra-configure-flags='#{configure_flags}'" unless node[:nginx][:configure_flags].empty?}
+      #{node[:nginx][:configure_flags].empty? ? 'none' : "--extra-configure-flags='#{configure_flags}'"}
   }
   
   not_if "#{nginx_install}/sbin/nginx -V 2>&1 | grep passenger-#{node[:passenger_enterprise][:version]}"
