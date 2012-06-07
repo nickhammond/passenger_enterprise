@@ -37,7 +37,8 @@ execute "passenger_nginx_module" do
       --nginx-source-dir=#{Chef::Config[:file_cache_path]}/nginx-#{nginx_version} \
       --extra-configure-flags='#{configure_flags}'
   }
-  not_if "#{nginx_install}/sbin/nginx -V 2>&1 | grep '#{node[:ruby_enterprise][:gems_dir]}/gems/passenger-#{node[:passenger_enterprise][:version]}/ext/nginx'"
+  
+  not_if "#{nginx_install}/sbin/nginx -V 2>&1 | grep #{node[:passenger_enterprise][:version]}"
   notifies :restart, resources(:service => "nginx")
 end
 
